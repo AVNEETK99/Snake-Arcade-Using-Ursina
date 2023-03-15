@@ -20,11 +20,11 @@ class Player(Entity):
         self.x += time.dt * self.dx
         self.y += time.dt * self.dy
 
-        # Collision
+    
         hit_info = self.intersects()
         if hit_info.hit:
 
-            Audio('assets/apple_bite.wav')
+            Audio('assets/apple_bite.mp3')
             self.eaten += 1
             text.y = -1
             text = Text(text=f"Apple Eaten: {self.eaten}",position=(0,0.3),origin=(0,0),
@@ -37,18 +37,18 @@ class Player(Entity):
 
             body.append(new_body)
 
-        # Move the end segments first in range
+       
         for i in range(len(body)-1,0,-1):
             body[i].position=body[i-1].position
 
-        # First segment
+        
         if len(body) > 0:
             body[0].x=self.x
             body[0].y=self.y
 
-        # Boundary checking
+        
         if abs(self.x) > 0.47 or abs(self.y) > 0.47:
-            Audio('assets/whistle.wav')
+            Audio('assets/whistle.mp3')
             for segment in body:
                 segment.position=(10,10)
             body = []                
